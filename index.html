@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Credit card</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/daisyui@5"
+            type="text/css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script
+            src="https://kit.fontawesome.com/6cc4f903af.js"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body
+        class="flex flex-col justify-center gap-[50px] min-h-screen w-[750px] m-auto"
+    >
+        <main class="flex justify-between items-center">
+            <form class="join join-vertical" id="inputs-wrapper">
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Название банка</legend>
+                    <select
+                        type="text"
+                        class="select join-item focus:outline-none"
+                        id="bank-name-input"
+                    >
+                        <option selected disabled value="undefined">
+                            Выберите банк
+                        </option>
+                        <option value="OZON">Ozon Bank</option>
+                        <option value="SBER">Sber</option>
+                        <option value="TBANK">T-Bank</option>
+                    </select>
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">
+                        Тип платежной системы
+                    </legend>
+                    <select
+                        class="select join-item focus:outline-none"
+                        id="payment-provider-input"
+                    >
+                        <option selected disabled value="undefined">
+                            Выберите платежную систему
+                        </option>
+                        <option value="Visa">Visa</option>
+                        <option value="Mastercard">Mastercard</option>
+                    </select>
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Номер</legend>
+                    <input
+                        type="text"
+                        class="input join-item focus:outline-none"
+                        id="card-number-input"
+                    />
+                </fieldset>
+
+                <fieldset class="fieldset">
+                    <legend class="fieldset-legend">Имя держателя</legend>
+                    <input
+                        type="text"
+                        class="input join-item focus:outline-none"
+                        id="card-holder-name-input"
+                    />
+                </fieldset>
+
+                <fieldset class="fieldset w-fit">
+                    <legend class="fieldset-legend">Срок действия</legend>
+                    <label class="label cursor-pointer">
+                        <input
+                            type="radio"
+                            name="date-radio"
+                            class="radio"
+                            id="01/27"
+                            checked
+                        />
+                        <span class="label-text">01/27</span>
+                    </label>
+
+                    <label class="label cursor-pointer">
+                        <input
+                            type="radio"
+                            name="date-radio"
+                            class="radio"
+                            id="01/28"
+                        />
+                        <span class="label-text">01/28</span>
+                    </label>
+
+                    <label class="label cursor-pointer">
+                        <input
+                            type="radio"
+                            name="date-radio"
+                            class="radio"
+                            id="01/29"
+                        />
+                        <span class="label-text">01/29</span>
+                    </label>
+                </fieldset>
+
+                <button class="btn btn-success mt-[4px]" id="send-button">
+                    Отправить форму
+                </button>
+                <button class="btn btn-warning mt-[4px]" id="reset-button">
+                    Сбросить карту
+                </button>
+            </form>
+
+            <div class="hover-3d h-fit" id="card">
+                <div
+                    class="card w-96 bg-black text-white bg-[radial-gradient(circle_at_bottom_left,#ffffff04_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff04_35%,transparent_36%)] bg-size-[4.95em_4.95em]"
+                >
+                    <div class="card-body">
+                        <div class="flex justify-between mb-10">
+                            <div class="font-bold" id="bank-name">
+                                BANK OF MICHAELAND
+                            </div>
+                            <div
+                                class="text-5xl opacity-10 h-fit"
+                                id="payment-provider"
+                            >
+                                ❁
+                            </div>
+                        </div>
+                        <div class="text-lg mb-4 opacity-40" id="card-number">
+                            0210 8820 1150 0222
+                        </div>
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="text-xs opacity-20">
+                                    CARD HOLDER
+                                </div>
+                                <div id="card-holder-name">VICTOR VON D.</div>
+                            </div>
+                            <div>
+                                <div class="text-xs opacity-20">EXPIRES</div>
+                                <div id="date">01/26</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8 empty divs needed for the 3D effect -->
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </main>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название банка</th>
+                    <th>Тип платежной системы</th>
+                    <th>Номер карты</th>
+                    <th>Имя держателя</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <script type="module" src="main.js"></script>
+    </body>
+</html>
