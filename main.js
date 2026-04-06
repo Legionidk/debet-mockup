@@ -69,6 +69,7 @@ document.addEventListener("click", (e) => {
 
             document.querySelector("form").reset();
             document.querySelector("tbody").append(tr);
+            document.querySelector("table").hidden = false;
         }
     }
 });
