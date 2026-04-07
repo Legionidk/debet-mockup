@@ -14,6 +14,10 @@
             rel="stylesheet"
             type="text/css"
         />
+        <script
+            src="https://kit.fontawesome.com/6cc4f903af.js"
+            crossorigin="anonymous"
+        ></script>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     </head>
     <body
@@ -32,8 +36,8 @@
                     <legend class="fieldset-legend">Данные карты</legend>
 
                     <label class="select">
-                        <span class="label" id="bank-name-select">Банк</span>
-                        <select>
+                        <span class="label">Банк</span>
+                        <select id="bank-name-select">
                             <option value="undefined" selected disabled hidden>
                                 Выберите банк
                             </option>
@@ -41,7 +45,7 @@
                             <option value="SBER">Сбербанк</option>
                             <option value="ALFA">Альфа-Банк</option>
                             <option value="TBANK">Т-Банк</option>
-                            <option value="POCHTA">Почта Банк</option>
+                            <option value="POCHTABANK">Почта Банк</option>
                         </select>
                     </label>
 
@@ -84,6 +88,17 @@
                                 type="radio"
                                 name="payment-system-radio"
                                 class="radio"
+                                id="jcb"
+                                required
+                            />
+                            JCB
+                        </label>
+
+                        <label class="label w-fit">
+                            <input
+                                type="radio"
+                                name="payment-system-radio"
+                                class="radio"
                                 id="visa"
                                 required
                             />
@@ -95,9 +110,10 @@
                                 type="radio"
                                 name="payment-system-radio"
                                 class="radio"
-                                id="master"
+                                id="paypal"
+                                required
                             />
-                            Mastercard
+                            PayPal
                         </label>
 
                         <label class="label w-fit">
@@ -105,9 +121,20 @@
                                 type="radio"
                                 name="payment-system-radio"
                                 class="radio"
-                                id="union"
+                                id="stripe"
+                                required
                             />
-                            UnionPay
+                            Stripe
+                        </label>
+
+                        <label class="label w-fit">
+                            <input
+                                type="radio"
+                                name="payment-system-radio"
+                                class="radio"
+                                id="master"
+                            />
+                            Mastercard
                         </label>
 
                         <label class="label w-fit">
