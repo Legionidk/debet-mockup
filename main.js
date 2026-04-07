@@ -16,6 +16,7 @@ const paymentSystemClasses = {
 };
 
 const form = document.forms[0];
+let firstTableAppendCheck = true;
 
 form.addEventListener("input", (e) => {
     // Форматирования ввода номера карты.
@@ -76,5 +77,37 @@ form.addEventListener("input", (e) => {
 });
 
 form.addEventListener("submit", (e) => {
-    const table = document.querySelector("table");
+    e.preventDefault();
+    const tbody = document.querySelector("tbody");
+
+    // Удаляем плейсхолдер строку из таблицы,
+    // если она еще не удалена.
+    if (firstTableAppendCheck) {
+        tbody.deleteRow(0);
+        firstTableAppendCheck = false;
+    }
+
+    // Вставляем новую строку и создаем th с ее порядковым номером.
+    const tr = tbody.insertRow();
+    const countTh = document.createElement("th");
+    countTh.textContent = tbody.rows.length;
+    tr.append(countTh);
+
+    // Переносим НЕ radio Input'ы в таблицу.
+    for (let i = 1; i < 5; i++) {
+        const td = document.createElement("td");
+        td.textContent = form[i].value;
+        tr.append(td);
+    }
+
+    // Переносим radio input'ы в таблицу.
+    const paymentSystem = form.querySelector("input[type=radio]:checked").id;
+    const paymentSystemTd = document.createElement("td");
+    paymentSystemTd.textContent = paymentSystem;
+    tr.append(paymentSystemTd);
+
+    // Чистим форму и мокап.
+    form.reset();
+    for (const [key, value] of Object.entries(cardPlaceholders))
+        [(document.querySelector(`#${key}`).textContent = value)];
 });
