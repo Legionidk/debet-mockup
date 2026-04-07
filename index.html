@@ -1,129 +1,147 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="business">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Credit card</title>
+        <title>Debet card</title>
         <link
-            rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/daisyui@5"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css"
+            rel="stylesheet"
             type="text/css"
         />
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-        <script
-            src="https://kit.fontawesome.com/6cc4f903af.js"
-            crossorigin="anonymous"
-        ></script>
     </head>
     <body
-        class="flex flex-col justify-center gap-[50px] min-h-screen w-[750px] m-auto"
+        class="flex flex-col justify-center gap-[50px] items-center min-h-screen py-[50px]"
     >
-        <main class="flex justify-between items-center">
-            <form class="join join-vertical" id="inputs-wrapper">
-                <fieldset class="fieldset">
-                    <legend class="fieldset-legend">Название банка</legend>
-                    <select
-                        type="text"
-                        class="select join-item focus:outline-none"
-                        id="bank-name-input"
+        <main class="flex justify-between items-center w-[800px]">
+            <!-- 
+                В форму обернут <fieldset>, который стайлится через компоненты DaisyUI.
+                Таким образом мы получаем красивую форму для заполнения,
+                при этом оставляя весь функционал формы для JS.
+            -->
+            <form>
+                <fieldset
+                    class="w-full fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4"
+                >
+                    <legend class="fieldset-legend">Данные карты</legend>
+
+                    <label class="select">
+                        <span class="label" id="bank-name-select">Банк</span>
+                        <select>
+                            <option value="undefined" selected disabled hidden>
+                                Выберите банк
+                            </option>
+                            <option value="OZON">Ozon Банк</option>
+                            <option value="SBER">Сбербанк</option>
+                            <option value="ALFA">Альфа-Банк</option>
+                            <option value="TBANK">Т-Банк</option>
+                            <option value="POCHTA">Почта Банк</option>
+                        </select>
+                    </label>
+
+                    <label class="input">
+                        <span class="label">Номер карты</span>
+                        <input
+                            type="text"
+                            placeholder="0000 0000 0000 0000"
+                            id="card-number-input"
+                            required
+                        />
+                    </label>
+
+                    <label class="input">
+                        <span class="label">Держатель</span>
+                        <input
+                            type="text"
+                            placeholder="Иван Иванов"
+                            id="card-holder-input"
+                            required
+                        />
+                    </label>
+
+                    <label class="input">
+                        <span class="label">Срок действия</span>
+                        <input
+                            type="text"
+                            placeholder="00/00"
+                            id="expires-date-input"
+                            required
+                        />
+                    </label>
+
+                    <div
+                        class="grid grid-cols-2 gap-y-[5px]"
+                        id="payment-systems-radio-wrapper"
                     >
-                        <option selected disabled value="undefined">
-                            Выберите банк
-                        </option>
-                        <option value="OZON">Ozon Bank</option>
-                        <option value="SBER">Sber</option>
-                        <option value="TBANK">T-Bank</option>
-                    </select>
+                        <label class="label w-fit">
+                            <input
+                                type="radio"
+                                name="payment-system-radio"
+                                class="radio"
+                                id="visa"
+                                required
+                            />
+                            Visa
+                        </label>
+
+                        <label class="label w-fit">
+                            <input
+                                type="radio"
+                                name="payment-system-radio"
+                                class="radio"
+                                id="master"
+                            />
+                            Mastercard
+                        </label>
+
+                        <label class="label w-fit">
+                            <input
+                                type="radio"
+                                name="payment-system-radio"
+                                class="radio"
+                                id="union"
+                            />
+                            UnionPay
+                        </label>
+
+                        <label class="label w-fit">
+                            <input
+                                type="radio"
+                                name="payment-system-radio"
+                                class="radio"
+                                id="amrcnexpress"
+                            />
+                            American Express
+                        </label>
+                    </div>
+
+                    <button class="btn btn-neutral mt-4">
+                        Отправить форму
+                    </button>
                 </fieldset>
-
-                <fieldset class="fieldset">
-                    <legend class="fieldset-legend">
-                        Тип платежной системы
-                    </legend>
-                    <select
-                        class="select join-item focus:outline-none"
-                        id="payment-provider-input"
-                    >
-                        <option selected disabled value="undefined">
-                            Выберите платежную систему
-                        </option>
-                        <option value="Visa">Visa</option>
-                        <option value="Mastercard">Mastercard</option>
-                    </select>
-                </fieldset>
-
-                <fieldset class="fieldset">
-                    <legend class="fieldset-legend">Номер</legend>
-                    <input
-                        type="text"
-                        class="input join-item focus:outline-none"
-                        id="card-number-input"
-                    />
-                </fieldset>
-
-                <fieldset class="fieldset">
-                    <legend class="fieldset-legend">Имя держателя</legend>
-                    <input
-                        type="text"
-                        class="input join-item focus:outline-none"
-                        id="card-holder-name-input"
-                    />
-                </fieldset>
-
-                <fieldset class="fieldset w-fit">
-                    <legend class="fieldset-legend">Срок действия</legend>
-                    <label class="label cursor-pointer">
-                        <input
-                            type="radio"
-                            name="date-radio"
-                            class="radio"
-                            id="01/27"
-                            checked
-                        />
-                        <span class="label-text">01/27</span>
-                    </label>
-
-                    <label class="label cursor-pointer">
-                        <input
-                            type="radio"
-                            name="date-radio"
-                            class="radio"
-                            id="01/28"
-                        />
-                        <span class="label-text">01/28</span>
-                    </label>
-
-                    <label class="label cursor-pointer">
-                        <input
-                            type="radio"
-                            name="date-radio"
-                            class="radio"
-                            id="01/29"
-                        />
-                        <span class="label-text">01/29</span>
-                    </label>
-                </fieldset>
-
-                <button class="btn btn-success mt-[4px]" id="send-button">
-                    Отправить форму
-                </button>
-                <button class="btn btn-warning mt-[4px]" id="reset-button">
-                    Сбросить карту
-                </button>
             </form>
 
-            <div class="hover-3d h-fit" id="card">
+            <!-- 
+                Мокап карты из DaisyUI.
+            -->
+            <div class="hover-3d h-fit" id="card-mockup">
                 <div
                     class="card w-96 bg-black text-white bg-[radial-gradient(circle_at_bottom_left,#ffffff04_35%,transparent_36%),radial-gradient(circle_at_top_right,#ffffff04_35%,transparent_36%)] bg-size-[4.95em_4.95em]"
                 >
                     <div class="card-body">
                         <div class="flex justify-between mb-10">
                             <div class="font-bold" id="bank-name">
-                                BANK OF MICHAELAND
+                                BANK OF LATVERIA
                             </div>
                             <div
-                                class="text-5xl opacity-10 h-fit"
-                                id="payment-provider"
+                                class="text-5xl opacity-10"
+                                id="payment-system"
                             >
                                 ❁
                             </div>
@@ -136,17 +154,19 @@
                                 <div class="text-xs opacity-20">
                                     CARD HOLDER
                                 </div>
-                                <div id="card-holder-name">VICTOR VON D.</div>
+                                <div id="card-holder">VICTOR VON D.</div>
                             </div>
                             <div>
                                 <div class="text-xs opacity-20">EXPIRES</div>
-                                <div id="date">01/26</div>
+                                <div id="expires-date">29/08</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 8 empty divs needed for the 3D effect -->
+                <!--
+                    8 пустых div'ов для 3D эффекта лол.
+                -->
                 <div></div>
                 <div></div>
                 <div></div>
@@ -158,16 +178,27 @@
             </div>
         </main>
 
-        <table class="table" hidden>
+        <table class="table w-[800px]">
             <thead>
                 <tr>
-                    <th>Название банка</th>
-                    <th>Тип платежной системы</th>
+                    <th></th>
+                    <th>Банк</th>
                     <th>Номер карты</th>
-                    <th>Имя держателя</th>
+                    <th>Держатель</th>
+                    <th>Срок действия</th>
+                    <th>Платежка</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                <tr class="hover:bg-base-300">
+                    <th>1</th>
+                    <td>Здесь</td>
+                    <td>Будут</td>
+                    <td>Данные</td>
+                    <td>Карты</td>
+                    <td>Лол</td>
+                </tr>
+            </tbody>
         </table>
 
         <script type="module" src="main.js"></script>
