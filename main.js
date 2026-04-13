@@ -1,18 +1,9 @@
 const cardPlaceholders = {
-    "bank-name": "BANK OF LATVERIA",
-    "payment-system": "❁",
-    "card-number": "0210 8820 1150 0222",
-    "card-holder": "VICTOR VON D.",
-    "expires-date": "29/08",
-};
-
-const paymentSystemClasses = {
-    visa: "fa-cc-visa",
-    master: "fa-cc-mastercard",
-    amrcnexpress: "fa-cc-amex",
-    jcb: "fa-cc-jcb",
-    paypal: "fa-cc-paypal",
-    stripe: "fa-cc-stripe",
+    "#bank-name": "BANK OF LATVERIA",
+    "#payment-system": "fa-solid fa-dragon",
+    "#card-number": "0210 8820 1150 0222",
+    "#card-holder": "VICTOR VON D.",
+    "#expires-date": "29/08",
 };
 
 const form = document.forms[0];
@@ -53,12 +44,8 @@ form.addEventListener("input", (e) => {
 
     // Перенос данных из radio кнопок.
     if (e.target.type === "radio") {
-        const paymentSystemClass = paymentSystemClasses[e.target.id];
-        const paymentSystemLogo = document.createElement("i");
-        paymentSystemLogo.classList.add("fa-brands", paymentSystemClass);
-
-        document.querySelector("#payment-system").textContent = "";
-        document.querySelector("#payment-system").append(paymentSystemLogo);
+        document.querySelector("#payment-system").classList =
+            `fa-brands fa-cc-${e.target.id}`;
         return;
     }
 
@@ -73,7 +60,7 @@ form.addEventListener("input", (e) => {
         return;
     }
 
-    mockupTarget.textContent = cardPlaceholders[targetId];
+    mockupTarget.textContent = cardPlaceholders[`#${targetId}`];
 });
 
 form.addEventListener("submit", (e) => {
@@ -92,6 +79,7 @@ form.addEventListener("submit", (e) => {
     const countTh = document.createElement("th");
     countTh.textContent = tbody.rows.length;
     tr.append(countTh);
+    tr.classList.add("hover:bg-base-300");
 
     // Переносим НЕ radio Input'ы в таблицу.
     for (let i = 1; i < 5; i++) {
@@ -108,6 +96,12 @@ form.addEventListener("submit", (e) => {
 
     // Чистим форму и мокап.
     form.reset();
-    for (const [key, value] of Object.entries(cardPlaceholders))
-        [(document.querySelector(`#${key}`).textContent = value)];
+    for (const [key, value] of Object.entries(cardPlaceholders)) {
+        if (key === "#payment-system") {
+            document.querySelector(key).classList = value;
+            continue;
+        }
+
+        document.querySelector(key).textContent = value;
+    }
 });
